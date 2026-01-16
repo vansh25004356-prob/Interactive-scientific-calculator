@@ -1,0 +1,239 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+body.dark {
+    background: linear-gradient(135deg, #2c3e50, #34495e);
+}
+
+/* CALCULATOR */
+.calculator {
+    background: #fff;
+    border-radius: 20px;
+    padding: 20px;
+    border: 2px solid rgba(0,0,0,0.15);
+    box-shadow: 0 18px 35px rgba(0,0,0,0.2);
+}
+
+body.dark .calculator {
+    background: #2f2f2f;
+    border: 2px solid rgba(255,255,255,0.15);
+}
+
+/* HORIZONTAL */
+.calculator.horizontal {
+    display: flex;
+    gap: 20px;
+    width: 850px;
+    max-width: 95%;
+}
+
+.left-panel {
+    flex: 1.3;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.right-panel {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* DISPLAY */
+#display {
+    width: 100%;
+    height: 90px;
+    font-size: 2.2rem;
+    border-radius: 10px;
+    border: 2px solid rgba(0,0,0,0.15);
+    text-align: right;
+    padding: 0 20px;
+}
+
+/* BUTTONS */
+.buttons, .scientific-buttons {
+    display: grid;
+    gap: 10px;
+}
+
+.buttons {
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.scientific-buttons {
+    grid-template-columns: repeat(5, 1fr);
+}
+
+button {
+    height: 65px;
+    font-size: 1.1rem;
+    border-radius: 10px;
+    cursor: pointer;
+    border: 2px solid rgba(0,0,0,0.2);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+    transition: 0.2s;
+}
+
+button:hover {
+    transform: translateY(-2px);
+}
+
+button:active {
+    transform: translateY(2px);
+    box-shadow: inset 0 3px 6px rgba(0,0,0,0.3);
+}
+
+/* COLORS */
+.number { background: #e9ecef; }
+.operator { background: #007bff; color: #fff; border-color: #0056b3; }
+.equals { background: #28a745; color: #fff; border-color: #1e7e34; }
+.clear { background: #dc3545; color: #fff; border-color: #bd2130; }
+.memory { background: #6c757d; color: #fff; }
+.function { background: #28a745; color: #fff; border-color: #1e7e34; }
+.backspace { background: #ffc107; }
+
+/* TOGGLES */
+.mode-toggle, .theme-toggle {
+    text-align: center;
+}
+
+#theme-toggle-btn {
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+    .calculator.horizontal {
+        flex-direction: column;
+    }
+
+    .scientific-buttons {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* Algebra / Expression Display */
+.expression {
+    min-height: 28px;
+    font-size: 1rem;
+    color: #555;
+    text-align: right;
+    padding: 0 10px 5px;
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+body.dark .expression {
+    color: #ccc;
+}
+
+/* ============================= */
+/* EXPRESSION ERROR HIGHLIGHT   */
+/* ============================= */
+.display.error #display {
+    border: 2px solid #dc3545;
+    color: #dc3545;
+}
+
+/* ============================= */
+/* HISTORY PANEL                */
+/* ============================= */
+.history-panel {
+    width: 100%;
+    margin-bottom: 15px;
+    background: #ffffff;
+    border-radius: 15px;
+    padding: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    border: 1px solid rgba(0,0,0,0.1);
+    font-family: 'Inter', 'Poppins', 'Montserrat', Arial, sans-serif;
+    font-size: 1rem;
+}
+
+body.dark .history-panel {
+    background: #2f2f2f;
+    color: #fff;
+    border: 1px solid rgba(255,255,255,0.2);
+}
+
+.history-panel h4 {
+    margin-bottom: 10px;
+    font-size: 1rem;
+    font-weight: 600;
+    text-align: left;
+}
+
+.history-panel ul {
+    list-style: none;
+    max-height: 200px;
+    overflow-y: auto;
+    padding: 0;
+}
+
+.history-panel li {
+    padding: 6px 0;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+body.dark .history-panel li {
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+}
+/* ================================ */
+/* SIDE-BY-SIDE CALCULATOR + HISTORY */
+/* ================================ */
+
+.app-container {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+}
+
+/* Keep calculator fixed size */
+.calculator {
+    flex-shrink: 0;
+}
+
+/* History on the side */
+.history-panel {
+    width: 280px;
+    background: #ffffff;
+    border-radius: 15px;
+    padding: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    max-height: 420px;
+    overflow-y: auto;
+}
+
+body.dark .history-panel {
+    background: #2f2f2f;
+    color: #ffffff;
+}
+
+/* Mobile fallback */
+@media (max-width: 900px) {
+    .app-container {
+        flex-direction: column;
+    }
+
+    .history-panel {
+        width: 100%;
+    }
+}
